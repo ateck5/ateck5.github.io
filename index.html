@@ -18,6 +18,10 @@
             width: 100vw;
             height: 100vh;
         }
+
+        #pika {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -67,16 +71,15 @@
         if (oddHour === "r") {
             pikachu.css("padding-top", (s * ((doc.height() - pikachu.height()) / doc.height() * 100 / 3600)).toString() + "vh");
 
-//            console.log("hr", m * 60 + s / 36);
 
         } else if (oddHour === "l") {
             pikachu.css("padding-top", ((3600 - s ) * ((doc.height() - pikachu.height()) / doc.height() * 100 / 3600)).toString() + "vh");
 
-//            console.log("hl", (3600 - m * 60 + s) / 36);
         }
     };
 
     var getSprite = function () {
+        pikachu.css("display", "inline-block");
         spritenumber++;
         if (spritenumber >= 5) {
             spritenumber = 1;
@@ -96,57 +99,12 @@
         getPaddingLeft();
         getPaddingTop();
         getSprite();
-//        getHexClock();
+        getHexClock();
     };
 
     $('document').ready(function () {
-//        var pikachu = $("#pika");
-//        var today = new Date();
-//        var oddhour = getOddHour(h);
-//        var m = today.getMinutes();
-//        var s = today.getSeconds();
-//        if (oddhour === "r") {
-//            console.log(m, s, m * 60 + s);
-//            pikachu.css("padding-top", (m * s / 36).toString() + "vh");
-//        } else if (oddhour === "l") {
-//            pikachu.css("padding-top", ((3600 - m * s) / 36).toString() + "vh");
-//        } else {
-//            console.log(oddhour, typeof oddhour)
-//        }
-//        var spritenumber = 1;
-//        console.log(s, typeof s);
-//        var hex = "#" + h.toString(16) + m.toString(16) + s.toString(16);
-//        $("#container").css("background-color", hex);
         setInterval(function () {
             updatePika();
-//            var today = new Date();
-//            var h = today.getHours();
-//            oddhour = getOddHour(h);
-//
-//            var m = today.getMinutes();
-//            var s = today.getSeconds();
-//            spritenumber++;
-//            if (spritenumber >= 5) {
-//                spritenumber = 1;
-//            }
-//
-//            pikachu.attr("src", "pikachu_" + oddhour + spritenumber + ".png");
-//            if (oddhour === "r") {
-//                console.log(m, s, m * 60 + s);
-//                pikachu.css("padding-top", (distance / 36).toString() + "vh");
-//                pikachu.css("padding-left", ((distance - 60 * m) / 36).toString() + "vh");
-//            } else if (oddhour === "l") {
-//                pikachu.css("padding-top", ((3600 - (distance - 60 * m)) / 36).toString() + "vh");
-//                pikachu.css("padding-top", ((3600 - distance) / 36).toString() + "vh");
-//            } else {
-//                console.log(oddhour, typeof oddhour)
-//            }
-//
-//            console.log(s, spritenumber);
-//            var hex = "#" + h.toString(16) + m.toString(16) + s.toString(16);
-//
-//            console.log(hex);
-
             $("#container").css("background-color", hex);
         }, 1000);
     });
