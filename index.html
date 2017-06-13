@@ -32,7 +32,7 @@
 
     var pikachu = $("#pika");
     doc = $(document);
-    var today, h, m, s, oddHour, oddMinute, hex;
+    var today, h, m, s, oddHour, oddMinute, hhex, mhex, shex, hex;
     var spritenumber = 1;
 
     var getDate = function () {
@@ -88,7 +88,21 @@
     };
 
     var getHexClock = function () {
-        hex = "#" + h.toString(16) + m.toString(16) + s.toString(16);
+        hhex = h.toString(16);
+        mhex = m.toString(16);
+        shex = s.toString(16);
+        if (hhex.length === 1) {
+            hhex = "0" + hhex;
+        }
+        if (mhex.length === 1) {
+            mhex = "0" + mhex;
+        }
+        if (shex.length === 1) {
+            shex = "0" + shex;
+        }
+
+        hex = "#" + hhex + mhex + shex;
+        console.log(hex);
         $("#container").css("background-color", hex);
     };
 
@@ -105,7 +119,6 @@
     $('document').ready(function () {
         setInterval(function () {
             updatePika();
-            $("#container").css("background-color", hex);
         }, 1000);
     });
 
