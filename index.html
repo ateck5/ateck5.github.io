@@ -69,11 +69,11 @@
 
     var getPaddingTop = function () {
         if (oddHour === "r") {
-            pikachu.css("padding-top", ((m*60+s) * ((doc.height() - pikachu.height()) / doc.height() * 100 / 3600)).toString() + "vh");
+            pikachu.css("padding-top", ((m * 60 + s) * ((doc.height() - pikachu.height()) / doc.height() * 100 / 3600)).toString() + "vh");
 
 
         } else if (oddHour === "l") {
-            pikachu.css("padding-top", ((3600 - (m*60+s) ) * ((doc.height() - pikachu.height()) / doc.height() * 100 / 3600)).toString() + "vh");
+            pikachu.css("padding-top", ((3600 - (m * 60 + s) ) * ((doc.height() - pikachu.height()) / doc.height() * 100 / 3600)).toString() + "vh");
 
         }
     };
@@ -88,9 +88,10 @@
     };
 
     var getHexClock = function () {
-        hhex = h.toString(16);
-        mhex = m.toString(16);
-        shex = s.toString(16);
+        hhex = Math.floor(h * 11).toString(16);
+        mhex = Math.floor(m * 4.3).toString(16);
+        shex = Math.floor(s * 4.3).toString(16);
+        console.log(hhex, mhex, shex);
         if (hhex.length === 1) {
             hhex = "0" + hhex;
         }
@@ -102,7 +103,6 @@
         }
 
         hex = "#" + hhex + mhex + shex;
-        console.log(hex);
         $("#container").css("background-color", hex);
     };
 
