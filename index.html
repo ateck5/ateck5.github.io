@@ -142,16 +142,22 @@
 
     function getPokemon() {
         var input = document.getElementById("nameInput").value;
-        asciiKeys = [];
-        for (var i = 0; i < input.length; i ++)
-          asciiKeys.push(input[i].charCodeAt(0));
-        var asciiString = asciiKeys.join("");
-        var pokemonNumber = asciiString%805;
-        var spriteType = "normal-sprite";
+        var pokemon = "weedle"
+        if(pokemonArray.indexOf(input.toLowerCase()) == -1) {
+            asciiKeys = [];
+            for (var i = 0; i < input.length; i ++)
+              asciiKeys.push(input[i].charCodeAt(0));
+            var asciiString = asciiKeys.join("");
+            pokemon = pokemonArray[asciiString%805];
+        } else {
+            pokemon = input.toLowerCase();
+        }
+
+         var spriteType = "normal-sprite";
         if((Math.floor(Math.random() * 8192) + 1  ) == 1) {
             spriteType = "shiny-sprite";
-        }
-        pokemonImageUrl = "https://projectpokemon.org/images/"+ spriteType + "/" + pokemonArray[pokemonNumber] + ".gif"
+    }
+        pokemonImageUrl = "https://projectpokemon.org/images/"+ spriteType + "/" + pokemon + ".gif"
         document.getElementById("pokemonImage").src = pokemonImageUrl;
     }
 
