@@ -22,6 +22,12 @@
         #pika {
             display: none;
         }
+
+
+        .asciimon {
+            z-index: 1;
+            position: fixed;
+        }
     </style>
 </head>
 <body>
@@ -34,10 +40,12 @@
 <link rel="prefetch" href="pikachu_r3.png" as="image">
 <link rel="prefetch" href="pikachu_r4.png" as="image">
 <div id="container">
-    <input type="text" name="name" id="nameInput">
-    <button onclick="getPokemon()">submit</button>
-    <br>
-    <image id="pokemonImage"></image>
+    <div class="asciimon">
+        <input type="text" name="name" id="nameInput">
+        <button onclick="getPokemon()">submit</button>
+        <br>
+        <image id="pokemonImage"></image>
+    </div>
     <img id="pika" src="pikachu_r1.png" alt="">
 </div>
 <script>
@@ -143,24 +151,27 @@
     function getPokemon() {
         var input = document.getElementById("nameInput").value;
         var pokemon = "weedle"
-        if(pokemonArray.indexOf(input.toLowerCase()) == -1) {
+
+        if (pokemonArray.indexOf(input.toLowerCase()) == -1) {
             asciiKeys = [];
             for (var i = 0; i < input.length; i ++)
               asciiKeys.push(input[i].charCodeAt(0));
             var asciiString = asciiKeys.join("");
             pokemon = pokemonArray[asciiString%805];
         } else {
-
             pokemon = input.toLowerCase();
         }
+
         if (pokemon == undefined) {
             pokemon = "weedle"
         }
 
-         var spriteType = "normal-sprite";
-        if((Math.floor(Math.random() * 100) + 1  ) == 1) {
+        var spriteType = "normal-sprite";
+
+        if ((Math.floor(Math.random() * 100) + 1  ) == 1) {
             spriteType = "shiny-sprite";
-    }
+        }
+
         pokemonImageUrl = "https://projectpokemon.org/images/"+ spriteType + "/" + pokemon + ".gif"
         document.getElementById("pokemonImage").src = pokemonImageUrl;
     }
