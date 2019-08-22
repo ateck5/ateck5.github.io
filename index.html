@@ -150,7 +150,11 @@
             var asciiString = asciiKeys.join("");
             pokemon = pokemonArray[asciiString%805];
         } else {
+
             pokemon = input.toLowerCase();
+        }
+        if (pokemon == undefined) {
+            pokemon = "weedle"
         }
 
          var spriteType = "normal-sprite";
