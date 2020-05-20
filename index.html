@@ -25,13 +25,27 @@
 
 
         .asciimon {
-            margin: 10px;
+            margin-top: 1vh;
+            margin-bottom: 1vh;
+            margin-left: 1vw;
+            margin-right: 1vw;
             z-index: 1;
             position: fixed;
         }
 
         #pokemonImage {
             margin-top: 10px;
+        }
+
+        #comicalText {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 2em;
+            width: 80vw;
+            height: 30vh;
+        }
+
+        #comicalText span {
+            font-family: "Comic Sans MS", cursive, sans-serif;
         }
     </style>
 </head>
@@ -47,9 +61,11 @@
 <div id="container">
     <div class="asciimon">
         <input type="text" name="name" id="nameInput">
-        <button onclick="getPokemon()">submit</button>
+        <button onclick="onSubmit()">submit</button>
         <br>
         <image id="pokemonImage"></image>
+        <br>
+        <div id="comicalText"><p>bla</p></div>
     </div>
     <img id="pika" src="pikachu_r1.png" alt="">
 </div>
@@ -129,6 +145,9 @@
 
         hex = "#" + hhex + mhex + shex;
         $("#container").css("background-color", hex);
+
+        if(s%20==0) setPokemon(hex)
+
     };
 
     var updatePika = function () {
@@ -149,14 +168,19 @@
 
     document.getElementById('nameInput').onkeydown = function(e){
        if(e.keyCode == 13){
-         getPokemon()
+         onSubmit()
        }
     };
 
-    function getPokemon() {
+ 
+    function onSubmit() {
         var input = document.getElementById("nameInput").value;
-        var pokemon = "weedle"
+        setPokemon(input)
+        setComicalText(input)
+    }
 
+    function setPokemon(input) {
+        if (input == undefined) input = "weedle"
         if (pokemonArray.indexOf(input.toLowerCase()) == -1) {
             asciiKeys = [];
             for (var i = 0; i < input.length; i ++)
@@ -166,19 +190,21 @@
         } else {
             pokemon = input.toLowerCase();
         }
-
-        if (pokemon == undefined) {
-            pokemon = "weedle"
-        }
-
         var spriteType = "normal-sprite";
-
-        if ((Math.floor(Math.random() * 100) + 1  ) == 1) {
-            spriteType = "shiny-sprite";
-        }
+        if ((Math.floor(Math.random() * 100) + 1  ) == 1) spriteType = "shiny-sprite";
 
         pokemonImageUrl = "https://projectpokemon.org/images/"+ spriteType + "/" + pokemon + ".gif"
         document.getElementById("pokemonImage").src = pokemonImageUrl;
+    }
+
+    function setComicalText(input) {              
+        htmlText = $("#comicalText")
+        htmlText.text(null);
+        splittedText = input.split("")
+        for( i = 1; i <= splittedText.length; i++){
+            if(i%7 == 0) htmlText.append(`<span>${splittedText[i-1]}</span>`)
+            else htmlText.append(splittedText[i-1])
+        }
     }
 
     var pokemonArray = [
